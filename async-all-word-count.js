@@ -57,7 +57,7 @@ const countWords = function(paragraph) {
   wordsFound.forEach(word => {
     outputString += `${word}: ${wordBank[word]}\n`;
   })
-  
+  // console.log(outputString);
   return outputString;
 }
 
@@ -66,5 +66,25 @@ const countWords = function(paragraph) {
 // EXAMPLE USAGE
 // countAllWords('./input.txt', './output.txt') --> should output a .txt file in same directory
 var countAllWords = function(inputFile, outputFile) {
-  /* WRITE CODE HERE */ 
+  fs.readFile(inputFile, function(err, data) {
+    if (err) {
+      console.log(err);
+      return;
+    }
+    fs.writeFile(outputFile, countWords(data.toString()), function(err) {
+      if (err) {
+        console.log(err);
+        return;
+      } else {
+        console.log('saved');
+      }
+    })
+  })
 }
+countAllWords('./input.txt','./output.txt');
+
+
+
+
+
+
